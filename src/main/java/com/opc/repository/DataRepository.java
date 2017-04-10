@@ -14,7 +14,7 @@ import java.util.List;
  * Created by zjbao on 2017/4/5.
  */
 public interface DataRepository extends JpaRepository<Data, Integer> {
-    @Query("select d from Data d order by d.TIME ")
+    @Query("select d from Data d ")
     Page<Data> findLastData(Pageable pageable);
 
 

@@ -1,6 +1,7 @@
 package com.opc.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -14,87 +15,86 @@ public class Data {
     @Column(name = "TIME", nullable = false, unique = true)
     private Timestamp TIME;
     @Column(name = "random30", nullable = false)
-    private float random30;
+    private float machineA;
     @Column(name = "random32", nullable = false)
-    private float random32;
+    private float machineB;
     @Column(name = "random33", nullable = false)
-    private float random33;
+    private float machineC;
     @Column(name = "random34", nullable = false)
-    private float random34;
+    private float machineD;
     @Column(name = "random35", nullable = false)
-    private float random35;
+    private float machineE;
     @Column(name = "random40", nullable = false)
-    private float random40;
+    private float machineF;
+
 
     public Data() {
     }
 
-    public Data(Timestamp TIME, float random30, float random32, float random33, float random34, float random35, float random40) {
-
+    public Data(Timestamp TIME, float machineA, float machineB, float machineC, float machineD, float machineE, float machineF) {
         this.TIME = TIME;
-        this.random30 = random30;
-        this.random32 = random32;
-        this.random33 = random33;
-        this.random34 = random34;
-        this.random35 = random35;
-        this.random40 = random40;
+        this.machineA = machineA;
+        this.machineB = machineB;
+        this.machineC = machineC;
+        this.machineD = machineD;
+        this.machineE = machineE;
+        this.machineF = machineF;
     }
-
-
-    public void setTIME(Timestamp TIME) {
-        this.TIME = TIME;
-    }
-
-    public void setRandom30(float random30) {
-        this.random30 = random30;
-    }
-
-    public void setRandom32(float random32) {
-        this.random32 = random32;
-    }
-
-    public void setRandom33(float random33) {
-        this.random33 = random33;
-    }
-
-    public void setRandom34(float random34) {
-        this.random34 = random34;
-    }
-
-    public void setRandom35(float random35) {
-        this.random35 = random35;
-    }
-
-    public void setRandom40(float random40) {
-        this.random40 = random40;
-    }
-
 
     public Timestamp getTIME() {
         return TIME;
     }
 
-    public float getRandom30() {
-        return random30;
+    public void setTIME(Timestamp TIME) {
+        this.TIME = TIME;
     }
 
-    public float getRandom32() {
-        return random32;
+    public float getMachineA() {
+        return machineA;
     }
 
-    public float getRandom33() {
-        return random33;
+    public void setMachineA(float machineA) {
+        this.machineA = machineA;
     }
 
-    public float getRandom34() {
-        return random34;
+    public float getMachineB() {
+        return machineB;
     }
 
-    public float getRandom35() {
-        return random35;
+    public void setMachineB(float machineB) {
+        this.machineB = machineB;
     }
 
-    public float getRandom40() {
-        return random40;
+    public float getMachineC() {
+        return machineC;
     }
+
+    public void setMachineC(float machineC) {
+        this.machineC = machineC;
+    }
+
+    public float getMachineD() {
+        return machineD;
+    }
+
+    public void setMachineD(float machineD) {
+        this.machineD = machineD;
+    }
+
+    public float getMachineE() {
+        return machineE;
+    }
+
+    public void setMachineE(float machineE) {
+        this.machineE = machineE;
+    }
+
+    public float getMachineF() {
+        return machineF;
+    }
+
+    public void setMachineF(float machineF) {
+        this.machineF = machineF;
+    }
+
 }

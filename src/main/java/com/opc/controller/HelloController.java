@@ -18,10 +18,6 @@ public class HelloController {
 
         return "index";
     }
-    @RequestMapping("/demo")
-    public String demo() {
 
-        return "demo";
-    }
 }
 

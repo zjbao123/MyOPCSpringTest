@@ -1,1 +1,21 @@
-<h2>${DataList}</h2>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>实时数据展示</title>
+</head>
+<body onload="refresh()">
+<h2>OPC实时数据展示</h2>
+<p>
+<h2 th:text="${time}">time</h2>
+<h2 th:text="${MachineA}">time</h2>
+<h2 th:text="${MachineB}">time</h2>
+<h2 th:text="${MachineC}">time</h2>
+<h2 th:text="${MachineD}">time</h2>
+<h2 th:text="${MachineE}">time</h2>
+<h2 th:text="${MachineF}">time</h2>
+</p>
+
+</body>
+</html>
