@@ -7,15 +7,11 @@ import java.sql.Timestamp;
  * Created by zjbao on 2017/4/5.
  */
 @Entity
-@Table(name = "Data")
+@Table(name = "data")
 public class Data {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
-    private int id;
-
-    @Column(name = "TIME", nullable = false)
+    @Column(name = "TIME", nullable = false, unique = true)
     private Timestamp TIME;
     @Column(name = "random30", nullable = false)
     private float random30;
@@ -33,8 +29,8 @@ public class Data {
     public Data() {
     }
 
-    public Data(int id, Timestamp TIME, float random30, float random32, float random33, float random34, float random35, float random40) {
-        this.id = id;
+    public Data(Timestamp TIME, float random30, float random32, float random33, float random34, float random35, float random40) {
+
         this.TIME = TIME;
         this.random30 = random30;
         this.random32 = random32;
@@ -44,9 +40,6 @@ public class Data {
         this.random40 = random40;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setTIME(Timestamp TIME) {
         this.TIME = TIME;
@@ -76,9 +69,6 @@ public class Data {
         this.random40 = random40;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public Timestamp getTIME() {
         return TIME;

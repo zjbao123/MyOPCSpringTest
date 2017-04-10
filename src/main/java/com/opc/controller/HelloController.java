@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class HelloController {
     @RequestMapping("/")
-    public String index(ModelMap map) {
+    public String index() {
 
         return "index";
+    }
+    @RequestMapping("/demo")
+    public String demo() {
+
+        return "demo";
     }
 }
 
