@@ -4,18 +4,91 @@
 <head>
     <meta charset="utf-8"/>
     <title>实时数据展示</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+    <link rel="shortcut icon" th:href="@{/images/atom.png}"/>
+    <style>
+
+        diy {
+            width: 900px;
+            height:670px;
+            margin: 10px auto;
+            font-family: 'trebuchet MS', 'Lucida sans', Arial;
+            font-size: 20px;
+            color:#ffc20e ;
+            text-align: center;
+        }
+
+    </style>
 </head>
-<body onload="refresh()">
-<h2>OPC实时数据展示</h2>
-<p>
-<h2 th:text="${time}">time</h2>
-<h2 th:text="${MachineA}">time</h2>
-<h2 th:text="${MachineB}">time</h2>
-<h2 th:text="${MachineC}">time</h2>
-<h2 th:text="${MachineD}">time</h2>
-<h2 th:text="${MachineE}">time</h2>
-<h2 th:text="${MachineF}">time</h2>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <h2><a class="navbar-brand" href="index.html">空分流程</a></h2>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right torq-menu">
+                    <li><a href="index.html">主页</a></li>
+                    <li><a id="" href="about.html">OPC实时数据展示</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">项目<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">新产品</a></li>
+                            <li><a href="#">新概念</a>></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">联系我</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+            <div class="clearfix"></div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <h1 class="page-header">&middot;&nbsp;OPC实时数据展示&nbsp;&middot;</h1>
+
+    <p class="lead">
+
+<h2 class="diy" th:id="time1" th:text="${time}">time</h2>
+<h2 class="diy" th:id="MachineA1" th:text="${MachineA}">time</h2>
+<h2 class="diy" th:id="MachineB1" th:text="${MachineB}">time</h2>
+<h2 class="diy" th:id="MachineC1" th:text="${MachineC}">time</h2>
+<h2 class="diy" th:id="MachineD1" th:text="${MachineD}">time</h2>
+<h2 class="diy" th:id="MachineE1" th:text="${MachineE}">time</h2>
+<h2 class="diy" th:id="MachineF1" th:text="${MachineF}">time</h2>
 </p>
 
+<script th:inline="javascript">
+
+    function refresh() {
+        option = $(function () {
+            $.ajax({
+                url: "/demosource",
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    $('#MachineA1').html("MachineA：" + data[0].machineA);
+                    $('#MachineB1').html("MachineB：" +data[0].machineB);
+                    $('#MachineC1').html("MachineC：" +data[0].machineC);
+                    $('#MachineD1').html("MachineD：" +data[0].machineD);
+                    $('#MachineE1').html("MachineE：" +data[0].machineE);
+                    $('#MachineF1').html("MachineF：" +data[0].machineF);
+                    $('#time1').html("最近更新时间：" + data[0].time);
+
+                }
+            })
+        })
+    }
+
+    $(function () {
+        setInterval('refresh()', 1000);
+    });
+</script>
 </body>
 </html>

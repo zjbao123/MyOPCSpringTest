@@ -3,6 +3,7 @@ package com.opc.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by zjbao on 2017/4/5.
@@ -27,7 +28,6 @@ public class Data {
     @Column(name = "random40", nullable = false)
     private float machineF;
 
-
     public Data() {
     }
 
@@ -39,10 +39,11 @@ public class Data {
         this.machineD = machineD;
         this.machineE = machineE;
         this.machineF = machineF;
+//        this.datestamp= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(TIME);
     }
 
-    public Timestamp getTIME() {
-        return TIME;
+    public String getTIME() {
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(TIME);
     }
 
     public void setTIME(Timestamp TIME) {
