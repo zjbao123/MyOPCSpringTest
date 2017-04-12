@@ -39,7 +39,6 @@ public class Data {
         this.machineD = machineD;
         this.machineE = machineE;
         this.machineF = machineF;
-//        this.datestamp= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(TIME);
     }
 
     public String getTIME() {
