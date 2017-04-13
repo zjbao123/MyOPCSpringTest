@@ -30,6 +30,7 @@ public class HelloController {
 
         return "index";
     }
+
     @RequestMapping("/demo")
     public String demo() {
 
@@ -37,7 +38,7 @@ public class HelloController {
     }
 
     @RequestMapping(value = "/data")
-    public String getUserList(ModelMap map) {
+    public String getDataList(ModelMap map) {
         Pageable pageable = new PageRequest(0, 1, Sort.Direction.DESC, "TIME");
         Page<Data> DataPage = DataRepository.findLastData(pageable);
         List<Data> DataList = DataPage.getContent();
@@ -49,7 +50,13 @@ public class HelloController {
         map.addAttribute("MachineE", DataList.get(0).getMachineE());
         map.addAttribute("MachineF", DataList.get(0).getMachineF());
         return "data";
-
     }
+
+    @RequestMapping(value = "/historyData")
+    public String getHistoryData() {
+        return "historyData";
+    }
+
+
 }
 
