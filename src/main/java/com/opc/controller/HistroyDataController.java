@@ -23,7 +23,7 @@ public class HistroyDataController {
 
     @RequestMapping(value = "/historyDataSource")
     public List<Data> getHistoryUserList(){
-        Pageable pageable = new PageRequest(0, 10000, Sort.Direction.DESC, "TIME");
+        Pageable pageable = new PageRequest(0, 10000, Sort.Direction.ASC, "TIME");
         Page<Data> DataPage = DataRepository.findLastData(pageable);
         return DataPage.getContent();
     }

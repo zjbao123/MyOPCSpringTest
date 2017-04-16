@@ -174,50 +174,81 @@
             {
                 name: '机器A',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             },
             {
                 name: '机器B',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             },
             {
                 name: '机器C',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             },
             {
                 name: '机器D',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             },
             {
                 name: '机器E',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             },
             {
                 name: '机器F',
                 type: 'line',
-                areaStyle: {normal: {}},
-                data: []
+                data: [],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                }
             }
         ]
 
     };
+    myChart.setOption(option);
     myChart.showLoading();
-    var time = [];
-    var machineA = [];
-    var machineB = [];
-    var machineC = [];
-    var machineD = [];
-    var machineE = [];
-    var machineF = [];
+    var time2 = [];
+    var machineA2 = [];
+    var machineB2 = [];
+    var machineC2 = [];
+    var machineD2 = [];
+    var machineE2 = [];
+    var machineF2 = [];
     $.ajax({
         url: "/historyDataSource",
         type: 'POST',
@@ -225,46 +256,46 @@
         success: function (data) {
             if (data != null) {
                 for (var i in data) {
-                    time.push(data[i].time);
-                    machineA.push(data[i].machineA);
-                    machineB.push(data[i].machineB);
-                    machineC.push(data[i].machineC);
-                    machineD.push(data[i].machineD);
-                    machineE.push(data[i].machineE);
-                    machineF.push(data[i].machineF);
+                    time2.push(data[i].time);
+                    machineA2.push(data[i].machineA);
+                    machineB2.push(data[i].machineB);
+                    machineC2.push(data[i].machineC);
+                    machineD2.push(data[i].machineD);
+                    machineE2.push(data[i].machineE);
+                    machineF2.push(data[i].machineF);
                 }
                 myChart.hideLoading();
                 myChart.setOption({
 
                     xAxis: [
                         {
-                            data: time
+                            data: time2
                         }
                     ],
                     series: [
                         {
                             name: '机器A',
-                            data: machineA
+                            data: machineA2
                         },
                         {
                             name: '机器B',
-                            data: machineB
+                            data: machineB2
                         },
                         {
                             name: '机器C',
-                            data: machineC
+                            data: machineC2
                         },
                         {
                             name: '机器D',
-                            data: machineD
+                            data: machineD2
                         },
                         {
                             name: '机器E',
-                            data: machineE
+                            data: machineE2
                         },
                         {
                             name: '机器F',
-                            data: machineF
+                            data: machineF2
                         }
                     ]
 
@@ -282,9 +313,61 @@
             myChart.hideLoading();
 
         }
-    })
+    });
+    $(function() {var fresh = setInterval(function update(){
+        var option1 = $(function (){
+            $.ajax({
+                url: "/demosource",
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    machineA2.shift();
+                    machineA2.push(data[0].machineA);
+                    machineB2.shift();
+                    machineB2.push(data[0].machineB);
+                    machineC2.shift();
+                    machineC2.push(data[0].machineC);
+                    machineD2.shift();
+                    machineD2.push(data[0].machineD);
+                    machineE2.shift();
+                    machineE2.push(data[0].machineE);
+                    machineF2.shift();
+                    machineF2.push(data[0].machineF);
+                    myChart.setOption({
 
-    myChart.setOption(option);
+                        xAxis: [
+                            {
+                                data: time2
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '机器A',
+                                data: machineA2
+                            },
+                            {
+                                name: '机器B',
+                                data: machineB2
+                            },
+                            {
+                                name: '机器C',
+                                data: machineC2
+                            },
+                            {
+                                name: '机器D',
+                                data: machineD2
+                            },
+                            {
+                                name: '机器E',
+                                data: machineE2
+                            },
+                            {
+                                name: '机器F',
+                                data: machineF2
+                            }
+                        ]});
+        }})})},5000);});
+
 </script>
 </body>
 </html>
