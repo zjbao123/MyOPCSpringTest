@@ -6,6 +6,7 @@
     <title>实时数据展示</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{/js/echarts.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" th:href="@{/images/atom.png}"/>
@@ -93,8 +94,6 @@
     </tbody>
 </table>
 
-
-
 <script th:inline="javascript">
 
     function refresh() {
@@ -120,6 +119,172 @@
     $(function () {
         setInterval('refresh()', 1000);
     });
+</script>
+<div  style = "margin-bottom: 20px"> </div>
+<div id="alldata" style="height:500px;min-height:100px;margin-top: 50px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('alldata'));
+    var option = {
+        title: {
+            text: '历史数据展示'
+        },
+        tooltip: {
+            trigger: 'axis'
+
+        },
+        dataZoom: [
+            {
+                type: 'slider',    //支持鼠标滚轮缩放
+                start: 0,            //默认数据初始缩放范围为10%到90%
+                end: 100
+            },
+            {
+                type: 'inside',    //支持单独的滑动条缩放
+                start: 0,            //默认数据初始缩放范围为10%到90%
+                end: 100
+            }
+        ],
+        legend: {
+            data: ['机器A', '机器B', '机器C', '机器D', '机器E', '机器F']
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: []
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '机器A',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            },
+            {
+                name: '机器B',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            },
+            {
+                name: '机器C',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            },
+            {
+                name: '机器D',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            },
+            {
+                name: '机器E',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            },
+            {
+                name: '机器F',
+                type: 'line',
+                areaStyle: {normal: {}},
+                data: []
+            }
+        ]
+
+    };
+    myChart.showLoading();
+    var time = [];
+    var machineA = [];
+    var machineB = [];
+    var machineC = [];
+    var machineD = [];
+    var machineE = [];
+    var machineF = [];
+    $.ajax({
+        url: "/historyDataSource",
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data != null) {
+                for (var i in data) {
+                    time.push(data[i].time);
+                    machineA.push(data[i].machineA);
+                    machineB.push(data[i].machineB);
+                    machineC.push(data[i].machineC);
+                    machineD.push(data[i].machineD);
+                    machineE.push(data[i].machineE);
+                    machineF.push(data[i].machineF);
+                }
+                myChart.hideLoading();
+                myChart.setOption({
+
+                    xAxis: [
+                        {
+                            data: time
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '机器A',
+                            data: machineA
+                        },
+                        {
+                            name: '机器B',
+                            data: machineB
+                        },
+                        {
+                            name: '机器C',
+                            data: machineC
+                        },
+                        {
+                            name: '机器D',
+                            data: machineD
+                        },
+                        {
+                            name: '机器E',
+                            data: machineE
+                        },
+                        {
+                            name: '机器F',
+                            data: machineF
+                        }
+                    ]
+
+                });
+            }
+            else {
+                alert("图表请求数据为空，可能服务器数据异常，您可以稍后再试！");
+                myChart.hideLoading();
+            }
+        },
+
+        error: function (errorMsg) {
+            //请求失败时执行该函数
+            alert("图表请求数据失败，可能是服务器开小差了");
+            myChart.hideLoading();
+
+        }
+    })
+
+    myChart.setOption(option);
 </script>
 </body>
 </html>

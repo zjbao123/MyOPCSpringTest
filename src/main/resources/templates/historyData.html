@@ -8,9 +8,9 @@
     <script th:src="@{/js/echarts.js}"></script>
 </head>
 <body>
-<div id="main" style="height:410px;min-height:100px;margin:0 auto;"></div>
+<div id="alldata" style="height:410px;min-height:100px;margin:0 auto;"></div>
 <script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart = echarts.init(document.getElementById('alldata'));
     var option = {
         title: {
             text: '历史数据展示'
@@ -112,13 +112,13 @@
         success: function (data) {
             if (data != null) {
                 for (var i in data) {
-                    time.push(data[i].time);
-                    machineA.push(data[i].machineA);
-                    machineB.push(data[i].machineB);
-                    machineC.push(data[i].machineC);
-                    machineD.push(data[i].machineD);
-                    machineE.push(data[i].machineE);
-                    machineF.push(data[i].machineF);
+                    time.push(data[data.length-i].time);
+                    machineA.push(data[data.length-i].machineA);
+                    machineB.push(data[data.length-i].machineB);
+                    machineC.push(data[data.length-i].machineC);
+                    machineD.push(data[data.length-i].machineD);
+                    machineE.push(data[data.length-i].machineE);
+                    machineF.push(data[data.length-i].machineF);
                 }
                 myChart.hideLoading();
                 myChart.setOption({
@@ -173,5 +173,6 @@
 
     myChart.setOption(option);
 </script>
+
 </body>
 </html>
